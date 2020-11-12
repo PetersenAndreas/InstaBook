@@ -14,5 +14,15 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
+    <!--create user servlet-->
+    <servlet>
+        <servlet-name>createuser</servlet-name>
+        <servlet-class>webapp.createuser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>createuser</servlet-name>
+        <url-pattern>/createuser</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>
