@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDateTime;
+
 
 @WebServlet(name = "createuser")
 public class createuser extends HttpServlet {
@@ -20,10 +20,18 @@ public class createuser extends HttpServlet {
         String gender = request.getParameter("gender");
         String age = request.getParameter("age");
 
+
+
         //if (username.isEmpty() || username.length() >50)
         //if (password.length() < 14 && password.length() > 128)
         //if (email.contains("@") && email.contains(".") && email.length() < 6 && email.length() > 254 )
-        LocalDateTime now = LocalDateTime.now();
+
+//        LocalDate d1 = LocalDate.parse(age, DateTimeFormatter.ISO_LOCAL_DATE);
+//        LocalDate d2 = LocalDate.parse(new Date().toString(), DateTimeFormatter.ISO_LOCAL_DATE);
+//        Duration diff = Duration.between(d2.atStartOfDay(), d1.atStartOfDay());
+//        long diffDays = diff.toDays();
+//        //4748 er cirka 13 år i dage
+//        if(diffDays > 4748)
         // vi skal trække nuværende dato fra age så man er minimum 13 år gammel...
 
 

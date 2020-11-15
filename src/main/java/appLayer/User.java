@@ -1,5 +1,7 @@
 package appLayer;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 public class User {
 
     private String username;
@@ -7,13 +9,19 @@ public class User {
     private String email;
     private String gender;
     private String age;
+    //private String role;
 
     public User(String username, String password, String email, String gender, String age) {
         this.username = username;
-        this.password = password;
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
         this.email = email;
         this.gender = gender;
         this.age = age;
+        //this.role = "User";
+    }
+
+    public boolean verifyPassword(String typedPw, String sqlPW) {
+        return (BCrypt.checkpw(typedPw, sqlPW));
     }
 
     public User() {}
@@ -30,9 +38,7 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setPassword(String password) {this.password = password; }
 
     public String getEmail() {
         return email;
@@ -57,4 +63,6 @@ public class User {
     public void setAge(String age) {
         this.age = age;
     }
+
+    //public String getRole() {return role;}
 }

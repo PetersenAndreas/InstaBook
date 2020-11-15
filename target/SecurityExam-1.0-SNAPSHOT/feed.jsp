@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+    <!-- c:out is used for preventing xss, we also imported it with the taglib in the top -->
     <h1>This is your InstaBook feed, <c:out value="${username}"/></h1>
     <p>When we have implemented it</p>
 </body>
