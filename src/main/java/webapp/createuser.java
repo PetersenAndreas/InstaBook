@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
@@ -36,6 +37,15 @@ public class createuser extends HttpServlet {
 
 
         DBConnection.createUser(username, password, email, gender, age);
+
+        HttpSession session = request.getSession();
+        // remove current session
+        session.invalidate();
+        // generate a new session
+        session = request.getSession(true);
+        session.setAttribute("username", username);
+        //setting session to expire in 15 mins
+        session.setMaxInactiveInterval(15*60);
 
         request.getRequestDispatcher("/login.jsp").forward(request, response);
     }

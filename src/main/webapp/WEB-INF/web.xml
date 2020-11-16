@@ -4,6 +4,13 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <session-config>
+        <cookie-config>
+            <http-only>false</http-only>
+            <secure>false</secure>
+        </cookie-config>
+    </session-config>
+
     <!--Login servlet-->
     <servlet>
         <servlet-name>login</servlet-name>
@@ -14,7 +21,17 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
-    <!--create user servlet-->
+    <!--Logout servlet-->
+    <servlet>
+        <servlet-name>logout</servlet-name>
+        <servlet-class>webapp.logout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <!--Create user servlet-->
     <servlet>
         <servlet-name>createuser</servlet-name>
         <servlet-class>webapp.createuser</servlet-class>
@@ -23,6 +40,6 @@
         <servlet-name>createuser</servlet-name>
         <url-pattern>/createuser</url-pattern>
     </servlet-mapping>
-
+    
 
 </web-app>

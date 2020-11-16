@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import utils.VerifyRecaptcha;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "login")
 public class login extends HttpServlet {
@@ -32,6 +33,14 @@ public class login extends HttpServlet {
         userList = DBConnection.DBlogin(username, password);
 
         if(!userList.isEmpty() && user.verifyPassword(password, userList.get(0).getPassword()) && verify) {
+            HttpSession session = request.getSession();
+            // remove current session
+            session.invalidate();
+            // generate a new session
+            session = request.getSession(true);
+            session.setAttribute("username", userList.get(0));
+            //setting session to expire in 15 mins
+            session.setMaxInactiveInterval(15*60);
             request.setAttribute("username", userList.get(0).getUsername());
             request.getRequestDispatcher("/WEB-INF/feed.jsp").forward(request, response);
         }else{
@@ -43,3 +52,6 @@ public class login extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 }
+
+
+
