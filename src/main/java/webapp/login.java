@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import utils.VerifyRecaptcha;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "login")
 public class login extends HttpServlet {
@@ -28,12 +29,20 @@ public class login extends HttpServlet {
         // get reCAPTCHA request param
         String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
         System.out.println(gRecaptchaResponse);
-        //boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
+        boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
 
         User user = new User();
         userList = DBConnection.DBlogin(username, password);
 
-        if(!userList.isEmpty() && user.verifyPassword(password, userList.get(0).getPassword()) /*&& verify*/) {
+        if(!userList.isEmpty() && user.verifyPassword(password, userList.get(0).getPassword()) && verify) {
+            HttpSession session = request.getSession();
+            // remove current session
+            session.invalidate();
+            // generate a new session
+            session = request.getSession(true);
+            session.setAttribute("username", userList.get(0));
+            //setting session to expire in 15 mins
+            session.setMaxInactiveInterval(15*60);
             request.setAttribute("username", userList.get(0).getUsername());
             if(userList.get(0).getRole().contains("a")) {
                 request.getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
@@ -47,7 +56,6 @@ public class login extends HttpServlet {
             request.setAttribute("errorMsg", "Failed login, please try agian");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
-
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }

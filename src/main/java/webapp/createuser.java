@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
@@ -19,8 +20,6 @@ public class createuser extends HttpServlet {
         String email = request.getParameter("email");
         String gender = request.getParameter("gender");
         String age = request.getParameter("age");
-
-
 
         //if (username.isEmpty() || username.length() >50)
         //if (password.length() < 14 && password.length() > 128)
@@ -35,6 +34,16 @@ public class createuser extends HttpServlet {
         // vi skal trække nuværende dato fra age så man er minimum 13 år gammel...
 
         DBConnection.createUser(username, password, email, gender, age);
+
+        HttpSession session = request.getSession();
+        // remove current session
+        session.invalidate();
+        // generate a new session
+        session = request.getSession(true);
+        session.setAttribute("username", username);
+        //setting session to expire in 15 mins
+        session.setMaxInactiveInterval(15*60);
+
         request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
