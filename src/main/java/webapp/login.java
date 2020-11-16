@@ -33,7 +33,7 @@ public class login extends HttpServlet {
 
         if(!userList.isEmpty() && user.verifyPassword(password, userList.get(0).getPassword()) && verify) {
             request.setAttribute("username", userList.get(0).getUsername());
-            request.getRequestDispatcher("/feed.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/feed.jsp").forward(request, response);
         }else{
             request.setAttribute("errorMsg", "Failed login, please try agian");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
