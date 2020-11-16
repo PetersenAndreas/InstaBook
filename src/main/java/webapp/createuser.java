@@ -34,9 +34,7 @@ public class createuser extends HttpServlet {
 //        if(diffDays > 4748)
         // vi skal trække nuværende dato fra age så man er minimum 13 år gammel...
 
-
         DBConnection.createUser(username, password, email, gender, age);
-
         request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

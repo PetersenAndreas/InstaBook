@@ -12,7 +12,7 @@
         <input type="text" name="username" placeholder="Name">
         <input type="password" name="password" placeholder="Password">
         <input type="submit" value="Login">
-        <p style="color: red"><c:out value="${errorMsg}"/></p>
+        <p style="color: #ff0000"><c:out value="${errorMsg}"/></p>
         <div class="g-recaptcha" data-sitekey="6LdrMeMZAAAAADZSX5WFK6fju3dLAwHK6jtpttBK"/>
     </form>
 </body>

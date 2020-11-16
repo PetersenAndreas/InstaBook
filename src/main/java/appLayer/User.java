@@ -9,7 +9,16 @@ public class User {
     private String email;
     private String gender;
     private String age;
-    //private String role;
+    private String role;
+
+    public User(String username, String password, String email, String gender, String age, String role) {
+        this.username = username;
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
+        this.email = email;
+        this.gender = gender;
+        this.age = age;
+        this.role = role;
+    }
 
     public User(String username, String password, String email, String gender, String age) {
         this.username = username;
@@ -17,7 +26,6 @@ public class User {
         this.email = email;
         this.gender = gender;
         this.age = age;
-        //this.role = "User";
     }
 
     public boolean verifyPassword(String typedPw, String sqlPW) {
@@ -38,7 +46,9 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {this.password = password; }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getEmail() {
         return email;
@@ -64,5 +74,11 @@ public class User {
         this.age = age;
     }
 
-    //public String getRole() {return role;}
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

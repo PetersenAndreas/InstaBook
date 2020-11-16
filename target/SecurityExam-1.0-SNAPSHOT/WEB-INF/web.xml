@@ -24,5 +24,24 @@
         <url-pattern>/createuser</url-pattern>
     </servlet-mapping>
 
+    <!--create post servlet-->
+    <servlet>
+        <servlet-name>createpost</servlet-name>
+        <servlet-class>webapp.createpost</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>createpost</servlet-name>
+        <url-pattern>/createpost</url-pattern>
+    </servlet-mapping>
+
+    <!--create feed servlet-->
+    <servlet>
+        <servlet-name>feed</servlet-name>
+        <servlet-class>webapp.feed</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>feed</servlet-name>
+        <url-pattern>/feed</url-pattern>
+    </servlet-mapping>
 
 </web-app>
