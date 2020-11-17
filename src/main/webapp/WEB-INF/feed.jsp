@@ -20,9 +20,16 @@
 %>
 <!-- c:out is used for preventing xss, we also imported it with the taglib in the top -->
 <h1>This is your InstaBook feed, <c:out value="${username}"/></h1>
-<img alt="Image" src="${allPosts}" class="img-thumbnail">
+<img alt="Image" src="${allPosts}">
 
-<a href="/createpost.jsp">Make a post</a>
+<h1>Iterating over ArrayList</h1>
+<ul>
+    <c:forEach items="${allPosts}" var="value">
+        <li><c:out value="${value}"/></li>
+    </c:forEach>
+</ul>
+
+<a href="/WEB-INF/createpost.jsp">Make a post</a>
 
 <c:if test="${sessionScope.get('username') != null}">
     <p>DEN VIRKER!!!!!! \('o')/</p>

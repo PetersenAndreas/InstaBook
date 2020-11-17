@@ -71,8 +71,6 @@ public class DBPosts {
 
     public static ArrayList<Image> getPictures () throws FileNotFoundException {
 
-        File file = new File("D:\\InstaBook_uploads\\Nina.png");
-        FileOutputStream fos = new FileOutputStream(file);
         byte b[];
         Blob blob;
         ArrayList<Image> image_list = new ArrayList();
@@ -89,20 +87,26 @@ public class DBPosts {
 
             while (rs.next()) {
                 blob = rs.getBlob("picture");
-                //b = blob.getBytes(1, (int)blob.length());
-                //fos.write(b);
                 byte[] imageByte = blob.getBytes(1, (int)blob.length());
                 InputStream is=new ByteArrayInputStream(imageByte);
                 BufferedImage imag = ImageIO.read(is);
+                //ImageIO.write(imag);
+
                 //String bytesBase64 = Base64.getEncoder().encodeToString(imageByte);
                 image = imag;
-                image.getGraphics().create();
+
+//                JLabel picLabel = new JLabel(new ImageIcon(image));
+//                JPanel jPanel = new JPanel();
+//                jPanel.add(picLabel);
+//                JFrame f = new JFrame();
+//                f.add(jPanel);
+//                f.setVisible(true);
+
+                //ImageIcon icon = new ImageIcon(image);
                 image_list.add(image);
-                //ImageIcon icon = new ImageIcon(img);
             }
             rs.close();
             pStmt.close();
-            fos.close();
             conn.close();
         }catch(SQLException se){
             //Handle errors for JDBC

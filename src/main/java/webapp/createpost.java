@@ -22,12 +22,8 @@ public class createpost extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String title = request.getParameter("title");
-        String path = "D:\\InstaBook_uploads\\Nina.png";
-        Part filePart = request.getPart( "file");
+        Part filePart = request.getPart( "picture");
         InputStream fileName = filePart.getInputStream();
-        for(Part part : request.getParts()) {
-            part.write(path + fileName );
-        }
 
         DBPosts.createPost(title, fileName);
         request.getRequestDispatcher("/WEB-INF/feed.jsp").forward(request, response);

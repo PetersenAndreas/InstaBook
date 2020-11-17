@@ -1,6 +1,6 @@
 package webapp;
 
-import Database.DBConnection;
+import Database.DBUsers;
 import Database.DBPosts;
 import appLayer.User;
 
@@ -32,9 +32,9 @@ public class login extends HttpServlet {
         boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
 
         User user = new User();
-        userList = DBConnection.DBlogin(username, password);
+        userList = DBUsers.getUsers(username, password);
 
-        if(!userList.isEmpty() && user.verifyPassword(password, userList.get(0).getPassword()) && verify) {
+        if(!userList.isEmpty() && user.verifyPassword(password, userList.get(0).getPassword()) /*&& verify*/) {
             HttpSession session = request.getSession();
             // remove current session
             session.invalidate();
