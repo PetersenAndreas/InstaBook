@@ -1,4 +1,7 @@
 <%@ page import="appLayer.User" %>
+<%@ page import="appLayer.Post" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Database.DBPosts" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -9,7 +12,6 @@
 <%
     if (session.getAttribute("username") !=null) {
         User u = (User) session.getAttribute("username");
-        System.out.println(u.getUsername());
     } else {
         // log noget her...
         // Nogen prøvede at komme ind på admin page.
@@ -19,17 +21,19 @@
     }
 %>
 <!-- c:out is used for preventing xss, we also imported it with the taglib in the top -->
-<h1>This is your InstaBook feed, <c:out value="${username}"/></h1>
-<img alt="Image" src="${allPosts}">
+<h1 align="center">This is your InstaBook feed, <c:out value="${username}"/></h1>
 
-<h1>Iterating over ArrayList</h1>
-<ul>
-    <c:forEach items="${allPosts}" var="value">
-        <li><c:out value="${value}"/></li>
+<form align="center" action="/feed" method="post">
+    <input type="submit" value="create new post"/>
+</form>
+
+<ul align="center">
+    <c:forEach items="${allPosts}" var="strings">
+            <li><c:out value="${strings.title}" /><li>
+            <br>
+            <img src="<c:out value="${strings.picturePath}"/>" style="max-width: 225px; width: 100%; max-height: 300px; height: auto;"/>
     </c:forEach>
 </ul>
-
-<a href="/WEB-INF/createpost.jsp">Make a post</a>
 
 <c:if test="${sessionScope.get('username') != null}">
     <p>DEN VIRKER!!!!!! \('o')/</p>

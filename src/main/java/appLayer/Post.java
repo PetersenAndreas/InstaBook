@@ -5,26 +5,18 @@ import java.io.InputStream;
 public class Post {
 
     private String title;
-    private InputStream file;
-    private String base64Image;
-    private byte[] image;
+    private String picturePath;
+    private String username;
 
-    public byte[] getImage() {
-        return this.image;
-    }
-
-
-    public String getBase64Image() {
-        return base64Image;
-    }
-
-    public void setBase64Image(String base64Image) {
-        this.base64Image = base64Image;
-    }
-
-    public Post(String title, InputStream file) {
+    public Post(String title, String picturePath) {
         this.title = title;
-        this.file = file;
+        this.picturePath = picturePath;
+    }
+
+    public Post(String title, String picturePath, String username) {
+        this.title = title;
+        this.picturePath = picturePath;
+        this.username = username;
     }
 
     public Post() {}
@@ -37,11 +29,19 @@ public class Post {
         this.title = title;
     }
 
-    public InputStream getFile() {
-        return file;
+    public String getPicturePath() {
+        return picturePath;
     }
 
-    public void setFile(InputStream file) {
-        this.file = file;
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

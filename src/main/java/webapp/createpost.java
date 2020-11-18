@@ -1,6 +1,8 @@
 package webapp;
 
+import Database.CloudinaryDB;
 import Database.DBPosts;
+import Database.PictureDB;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -10,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.*;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
+import java.util.ArrayList;
 
 @WebServlet(name = "createpost" )
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
@@ -22,10 +23,16 @@ public class createpost extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String title = request.getParameter("title");
-        Part filePart = request.getPart( "picture");
-        InputStream fileName = filePart.getInputStream();
+        ArrayList<Part> parts = (ArrayList<Part>) request.getParts();
 
-        DBPosts.createPost(title, fileName);
+        CloudinaryDB CDB = new CloudinaryDB();
+        PictureDB PDB = new PictureDB(CDB);
+        ArrayList<String> result_list = PDB.uploadPost(parts);
+        request.setAttribute("allTitles", title);
+        request.setAttribute("allPicturePaths", result_list);
+
+        DBPosts.createPost(title, result_list.get(result_list.size() -1));
+
         request.getRequestDispatcher("/WEB-INF/feed.jsp").forward(request, response);
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException {

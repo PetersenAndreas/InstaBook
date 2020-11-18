@@ -32,32 +32,6 @@ public class User {
         return (BCrypt.checkpw(typedPw, sqlPW));
     }
 
-    public boolean passwordValidity(String password) {
-        if (password.length() < 8 || password.length() > 128) {
-            return false;
-        } else {
-            for (int p = 0; p < password.length(); p++) {
-                if (Character.isUpperCase(password.charAt(p))) {
-                }
-            }
-            for (int q = 0; q < password.length(); q++) {
-                if (Character.isLowerCase(password.charAt(q))) {
-                }
-            }
-            for (int r = 0; r < password.length(); r++) {
-                if (Character.isDigit(password.charAt(r))) {
-                }
-            }
-            /*for (int s = 0; s < password.length(); s++) {
-                String input = "";
-                if (input.matches("[^a-zA-Z0-9 ]")) {
-                //if (Character.isSpecialCharacter(password.charAt(s))) {
-                }
-            }*/
-            return true;
-        }
-    }
-
     public User() {}
 
     public String getUsername() {

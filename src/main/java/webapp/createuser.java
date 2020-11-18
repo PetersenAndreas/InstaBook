@@ -36,16 +36,18 @@ public class createuser extends HttpServlet {
         if (username.isEmpty() || username.length() > 50) {
             request.setAttribute("errorMsg", "Failed to create user. Username must be between 1 - 50 characters");
             //tilføj error for "username already in use"
-        }   else if (!user.passwordValidity(password)) {
-            request.setAttribute("errorMsg", "Failed to create user. Username must be between 1 - 50 characters");
         }
-        /*else if (password.length() < 14 || password.length() > 128) {
-            request.setAttribute("errorMsg", "Failed to create user. Password must be between 14 - 128 characters");
-            //tilføj error for password uden "special characters"
-        }*/   else if (!email.contains("@") || !email.contains(".") || email.length() < 6 || email.length() > 254 ) {
+        else if (password.isEmpty() || password.length() < 14 || password.length() > 63 /*|| !password.contains("#")*/
+                ) {
+            request.setAttribute("errorMsg", "Failed to create user. Password must be between 14 - 63 characters"
+                    + " and contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character");
+                //if (Character.isSpecialCharacter(password.charAt(s)))
+        }
+        else if (!email.contains("@") || !email.contains(".") || email.length() < 6 || email.length() > 254 ) {
             request.setAttribute("errorMsg", "Failed to create user. email must be valid and between 6 and 254 characters");
             //tilføj potentielt et reelt email-tjek.. om den eksisterer hos forskellige services.
-        } /*else if(diffDays < 4748) {
+        }
+        /*else if(diffDays < 4748) {
             request.setAttribute("errorMsg", "Failed to create user. You must be at least 13 years old");
         }*/ else {
             DBUsers.createUser(username, password, email, gender, age);
