@@ -47,7 +47,6 @@ public class DBPosts {
         ArrayList<Post> post_List = new ArrayList();
         PreparedStatement pStmt = null;
         String sqlGetPosts = ("SELECT title, picture, username FROM posts");
-
         try {
             conn = SQLDBConnection.getConnection();
             pStmt = conn.prepareStatement(sqlGetPosts);

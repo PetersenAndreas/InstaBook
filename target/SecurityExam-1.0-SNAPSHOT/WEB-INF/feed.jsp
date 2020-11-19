@@ -27,7 +27,7 @@
     <input type="submit" value="create new post"/>
 </form>
 
-<ul align="center">
+<ul align="center" style="list-style-type:none;">
     <c:forEach items="${allPosts}" var="strings">
             <li><c:out value="${strings.title}" /><li>
             <br>

@@ -8,13 +8,10 @@ import appLayer.User;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import utils.VerifyRecaptcha;
-
-import javax.swing.*;
 
 @WebServlet(name = "login")
 public class login extends HttpServlet {
@@ -28,7 +25,6 @@ public class login extends HttpServlet {
 
         // get reCAPTCHA request param
         String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
-        //System.out.println(gRecaptchaResponse);
         boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
 
         User user = new User();
