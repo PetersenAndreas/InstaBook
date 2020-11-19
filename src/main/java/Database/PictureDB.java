@@ -1,6 +1,5 @@
 package Database;
 
-import Database.CloudinaryDB;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import java.io.File;

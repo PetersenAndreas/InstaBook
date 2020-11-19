@@ -29,6 +29,7 @@
 
 <ul align="center" style="list-style-type:none;">
     <c:forEach items="${allPosts}" var="strings">
+            <br>
             <li><c:out value="${strings.title}" /><li>
             <br>
             <img src="<c:out value="${strings.picturePath}"/>" style="max-width: 225px; width: 100%; max-height: 300px; height: auto;"/>
