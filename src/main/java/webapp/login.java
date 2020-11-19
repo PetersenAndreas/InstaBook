@@ -30,7 +30,7 @@ public class login extends HttpServlet {
         User user = new User();
         userList = DBUsers.getUsers(username, password);
 
-        if(!userList.isEmpty() && user.verifyPassword(password, userList.get(0).getPassword()) /*&& verify*/) {
+        if(!userList.isEmpty() && user.verifyPassword(password, userList.get(0).getPassword()) && verify) {
             HttpSession session = request.getSession();
             // remove current session
             session.invalidate();
