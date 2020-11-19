@@ -54,7 +54,7 @@ public class DBUsers {
 
         ArrayList<User> user_List = new ArrayList();
         PreparedStatement pStmt = null;
-        String sqlGetUsers = ("SELECT username, password, email, gender, age, user_role " +
+        String sqlGetUsers = ("SELECT userid, username, password, email, gender, age, user_role " +
                 "FROM users " +
                 "WHERE username =?");
         try{
@@ -63,6 +63,7 @@ public class DBUsers {
             pStmt.setString(1, username);
             ResultSet rs = pStmt.executeQuery();
             while (rs.next()) {
+                int SQLuserid = rs.getInt("userid");
                 String SQLuser = rs.getString("username");
                 String SQLpassword = rs.getString("password");
                 String SQLemail = rs.getString("email");
@@ -71,6 +72,7 @@ public class DBUsers {
                 String SQLrole = rs.getString("user_role");
 
                 User newUser = new User();
+                newUser.setUserid(SQLuserid);
                 newUser.setUsername(SQLuser);
                 newUser.setPassword(SQLpassword);
                 newUser.setEmail(SQLemail);
@@ -83,6 +85,47 @@ public class DBUsers {
                 if(!user_List.get(0).verifyPassword(user.getPassword(), newUser.getPassword())) {
                     user_List = new ArrayList<User>();
                 }
+            }
+            rs.close();
+            pStmt.close();
+            conn.close();
+        }catch(SQLException se){
+            se.printStackTrace();
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            try{
+                if(pStmt!=null)
+                    pStmt.close();
+            }catch(SQLException se2){
+            }
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }
+        }
+        return user_List;
+    }
+
+    public static ArrayList getAllUsers () {
+        ArrayList<User> user_List = new ArrayList();
+        PreparedStatement pStmt = null;
+        String sqlGetUsers = ("SELECT userid, username " +
+                "FROM users");
+        try{
+            conn = SQLDBConnection.getConnection();
+            pStmt = conn.prepareStatement(sqlGetUsers);
+            ResultSet rs = pStmt.executeQuery();
+            while (rs.next()) {
+                int SQLuserid = rs.getInt("userid");
+                String SQLuser = rs.getString("username");
+
+                User newUser = new User();
+                newUser.setUserid(SQLuserid);
+                newUser.setUsername(SQLuser);
+                user_List.add(newUser);
             }
             rs.close();
             pStmt.close();

@@ -40,13 +40,14 @@ public class login extends HttpServlet {
             //setting session to expire in 15 mins
             session.setMaxInactiveInterval(15*60);
             request.setAttribute("username", userList.get(0).getUsername());
+            request.setAttribute("password", userList.get(0).getPassword());
             if(userList.get(0).getRole().contains("a")) {
                 request.getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
             } else {
                 ArrayList<Post> post_list = new ArrayList();
                 post_list = DBPosts.getPictures();
-
                 request.setAttribute("allPosts", post_list);
+
                 request.getRequestDispatcher("/WEB-INF/feed.jsp").forward(request, response);
             }
         }else{

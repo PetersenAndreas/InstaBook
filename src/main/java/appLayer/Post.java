@@ -1,22 +1,21 @@
 package appLayer;
 
-import java.io.InputStream;
 
 public class Post {
 
     private String title;
     private String picturePath;
-    private String username;
+    private int userid;
 
     public Post(String title, String picturePath) {
         this.title = title;
         this.picturePath = picturePath;
     }
 
-    public Post(String title, String picturePath, String username) {
+    public Post(String title, String picturePath, int userid) {
         this.title = title;
         this.picturePath = picturePath;
-        this.username = username;
+        this.userid = userid;
     }
 
     public Post() {}
@@ -37,11 +36,11 @@ public class Post {
         this.picturePath = picturePath;
     }
 
-    public String getUsername() {
-        return username;
+    public int getUserid() {
+        return userid;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 }

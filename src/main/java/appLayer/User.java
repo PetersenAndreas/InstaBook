@@ -4,6 +4,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class User {
 
+    private int userid;
     private String username;
     private String password;
     private String email;
@@ -12,6 +13,15 @@ public class User {
     private String role;
 
     public User(String username, String password, String email, String gender, String age, String role) {
+        this.username = username;
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
+        this.email = email;
+        this.gender = gender;
+        this.age = age;
+        this.role = role;
+    }
+
+    public User(int userid, String username, String password, String email, String gender, String age, String role) {
         this.username = username;
         this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
         this.email = email;
@@ -80,5 +90,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 }
