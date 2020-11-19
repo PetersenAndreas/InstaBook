@@ -3,6 +3,11 @@
 <html>
 <head>
     <title>Admin</title>
+    <style>
+        body{
+            font-family: Arial;
+        }
+    </style>
 </head>
 <body>
     <h1>Congratulations, <c:out value="${username}"/>, you have made it to the admin page..

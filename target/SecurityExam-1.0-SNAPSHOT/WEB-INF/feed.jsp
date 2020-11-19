@@ -7,6 +7,11 @@
 <html>
 <head>
     <title>InstaBook Feed</title>
+    <style>
+        body{
+            font-family: Arial;
+        }
+    </style>
 </head>
 <body>
 <%
@@ -29,7 +34,7 @@
 <c:if test="${sessionScope.get('username') != null}">
 
     <form action="/feed" method="post">
-        <input type="submit" value="create new post"/>
+        <input type="submit" value="Create new post"/>
     </form>
     <form action="logout" method="post">
         <input type="submit" value="Logout" onclick="myFunc()">
@@ -50,7 +55,7 @@
 
 <script>
     function myFunc() {
-        alert("You have been logged out!");
+        alert("You will be logged out now!");
     }
 </script>
 

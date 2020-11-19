@@ -11,6 +11,11 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        body{
+            font-family: Arial;
+        }
+    </style>
 </head>
 <body>
 <h1>Error!</h1>
