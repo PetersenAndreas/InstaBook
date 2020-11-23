@@ -1,8 +1,12 @@
 package appLayer;
 
+import encryption.CryptoMngr;
 import org.mindrot.jbcrypt.BCrypt;
 
+
 public class User {
+
+    public CryptoMngr encryptor = new CryptoMngr();
 
     private int userid;
     private String username;
@@ -15,7 +19,7 @@ public class User {
     public User(String username, String password, String email, String gender, String age, String role) {
         this.username = username;
         this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
-        this.email = email;
+        this.email = encryptor.encrypt(email);
         this.gender = gender;
         this.age = age;
         this.role = role;
@@ -24,7 +28,7 @@ public class User {
     public User(int userid, String username, String password, String email, String gender, String age, String role) {
         this.username = username;
         this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
-        this.email = email;
+        this.email = encryptor.encrypt(email);
         this.gender = gender;
         this.age = age;
         this.role = role;
@@ -33,7 +37,7 @@ public class User {
     public User(String username, String password, String email, String gender, String age) {
         this.username = username;
         this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
-        this.email = email;
+        this.email = encryptor.encrypt(email);
         this.gender = gender;
         this.age = age;
     }

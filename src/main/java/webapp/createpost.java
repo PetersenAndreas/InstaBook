@@ -2,7 +2,6 @@ package webapp;
 
 import Database.CloudinaryDB;
 import Database.DBPosts;
-import Database.DBUsers;
 import Database.PictureDB;
 import appLayer.Post;
 import appLayer.User;
@@ -11,7 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import java.io.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 @WebServlet(name = "createpost" )
@@ -21,15 +20,17 @@ import java.util.ArrayList;
 )
 public class createpost extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        // remove current session
+        User sessionUser = (User) session.getAttribute("username");
+        session.invalidate();
+        // generate a new session
+        session = request.getSession(true);
+        session.setAttribute("username", sessionUser);
+        //setting session to expire in 15 mins
+        session.setMaxInactiveInterval(15*60);
 
-        //String username = request.getParameter("username");
-        //String password = request.getParameter("password");
-        ArrayList<User> userList;
-        userList = DBUsers.getAllUsers();
-        //HttpSession session = request.getSession();
-        //session = request.getSession(true);
-        //String username = session.getAttribute("username")
-        int userid_result = userList.get(2).getUserid();
+        int userid_result = sessionUser.getUserid();
         System.out.println(userid_result);
 
         String title = request.getParameter("title");
@@ -37,10 +38,6 @@ public class createpost extends HttpServlet {
         CloudinaryDB CDB = new CloudinaryDB();
         PictureDB PDB = new PictureDB(CDB);
         ArrayList<String> result_list = PDB.uploadPost(parts);
-
-        //request.setAttribute("allTitles", title);
-        //request.setAttribute("allPicturePaths", result_list);
-        //request.setAttribute("userID", title);
 
         DBPosts.createPost(title, result_list.get(result_list.size() -1), userid_result);
 

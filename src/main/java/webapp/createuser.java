@@ -10,10 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 
 @WebServlet(name = "createuser")
@@ -59,7 +55,6 @@ public class createuser extends HttpServlet {
         session.invalidate();
         // generate a new session
         session = request.getSession(true);
-        session.setAttribute("username", username);
         //setting session to expire in 15 mins
         session.setMaxInactiveInterval(15*60);
 

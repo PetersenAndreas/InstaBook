@@ -1,18 +1,17 @@
 package utils;
 
-import java.io.*;
-import java.net.URL;
-
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.net.ssl.HttpsURLConnection;
+import java.io.*;
+import java.net.URL;
 
 public class VerifyRecaptcha {
 
     public static final String url = "https://www.google.com/recaptcha/api/siteverify";
 
-    public static final String secret = ""; //Husk at fjerne ved push
+    public static final String secret = "6LdrMeMZAAAAAI1wkj7uHZVEMJ5C265jTKN6pPn7"; //Husk at fjerne ved push
     private final static String USER_AGENT = "Mozilla/5.0";
 
     public static boolean verify(String gRecaptchaResponse) throws IOException {
