@@ -51,7 +51,7 @@ public class login extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/feed.jsp").forward(request, response);
             }
         }else{
-            request.setAttribute("errorMsg", "Failed login, please try agian");
+            request.setAttribute("errorMsg", "Failed login, please try again");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }

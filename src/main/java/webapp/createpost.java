@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -31,7 +32,6 @@ public class createpost extends HttpServlet {
         session.setMaxInactiveInterval(15*60);
 
         int userid_result = sessionUser.getUserid();
-        System.out.println(userid_result);
 
         String title = request.getParameter("title");
         ArrayList<Part> parts = (ArrayList<Part>) request.getParts();
@@ -39,7 +39,15 @@ public class createpost extends HttpServlet {
         PictureDB PDB = new PictureDB(CDB);
         ArrayList<String> result_list = PDB.uploadPost(parts);
 
-        DBPosts.createPost(title, result_list.get(result_list.size() -1), userid_result);
+        File f = new File(result_list.get(result_list.size()-1));
+        String fileName = f.getName();
+        String mimeType = getServletContext().getMimeType(fileName);
+        if (mimeType.startsWith("image/jpeg") || mimeType.startsWith("image/png") || mimeType.startsWith("image/gif")) {
+            DBPosts.createPost(title, result_list.get(result_list.size() -1), userid_result);
+        } else {
+            request.setAttribute("errorMessage", "Failed to upload picture. We only allow png, jpg and gif files");
+            request.getRequestDispatcher("/WEB-INF/createpost.jsp").forward(request, response);
+        }
 
         ArrayList<Post> post_list = new ArrayList();
         post_list = DBPosts.getPictures();

@@ -12,8 +12,8 @@ import javax.servlet.http.Part;
 public class PictureDB {
 
     private static final String UPLOAD_DIRECTORY = "pictures";
-    private static final String[] ALLOWED_FILE_TYPES = new String[]{"image/png", "image/jpeg"};
-    private static final String[] ALLOWED_FILE_NAMES = new String[]{"png", "jpg"};
+    private static final String[] ALLOWED_FILE_TYPES = new String[]{"image/png", "image/jpeg", "image/gif"};
+    private static final String[] ALLOWED_FILE_NAMES = new String[]{"png", "jpg", "gif"};
     private CloudinaryDB database;
 
     public PictureDB(CloudinaryDB database) {
@@ -63,7 +63,6 @@ public class PictureDB {
             throw new IllegalArgumentException("Picturefile could not be copied into the system. "
                     + "Please make sure the file is of any of the following types: " + allowedFileContentTypes);
         }
-
     }
 
     private boolean isFileTypeAllowed(String fileContentType) {
@@ -76,7 +75,6 @@ public class PictureDB {
         }
         return false;
     }
-
 
     private String constructAllowedFileContentTypesString() {
         String result = "";

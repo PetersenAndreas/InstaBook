@@ -11,7 +11,6 @@
     </style>
 </head>
 <body>
-    <%String err = request.getParameter("errorMsg");%>
     <div align="center">
         <br><br><br><br>
     <div style="background-color: lightgrey; width: 50%; border: solid black 1px; padding-bottom: 50px">

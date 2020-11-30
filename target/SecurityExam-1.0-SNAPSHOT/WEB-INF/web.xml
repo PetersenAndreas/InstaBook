@@ -51,7 +51,7 @@
         <url-pattern>/createpost</url-pattern>
     </servlet-mapping>
 
-    <!--create feed servlet-->
+    <!--feed servlet-->
     <servlet>
         <servlet-name>feed</servlet-name>
         <servlet-class>webapp.feed</servlet-class>
